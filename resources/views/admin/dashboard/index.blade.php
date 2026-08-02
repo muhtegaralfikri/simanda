@@ -107,7 +107,7 @@
 @if(auth()->user()->isPPTK() && count($analytics['action_items']) > 0)
 <div class="card" style="border:2px solid var(--accent-color); margin-bottom:24px;">
     <div class="card-header">
-        <h3 class="card-title" style="color:var(--accent-color);">&lightning; Tindakan yang Perlu Anda Selesaikan</h3>
+        <h3 class="card-title" style="color:var(--accent-color);">⚡ Tindakan yang Perlu Anda Selesaikan</h3>
     </div>
     <div style="display:flex; flex-direction:column; gap:8px; padding:16px;">
         @foreach($analytics['action_items'] as $item)
@@ -198,7 +198,7 @@
 @if(count($analytics['delayed_activities']) > 0)
 <div class="card" style="border-left:4px solid var(--danger);">
     <div class="card-header">
-        <h3 class="card-title" style="color:var(--danger);">&warning; Kegiatan Terlambat Melewati Tenggat Waktu</h3>
+        <h3 class="card-title" style="color:var(--danger);">⚠️ Kegiatan Terlambat Melewati Tenggat Waktu</h3>
     </div>
     <div class="table-responsive">
         <table class="table">
@@ -215,13 +215,13 @@
             <tbody>
                 @foreach($analytics['delayed_activities'] as $delay)
                 <tr>
-                    <td><strong>{{ $delay['code'] }}</strong></td>
-                    <td>{{ $delay['name'] }}</td>
-                    <td><span class="badge badge-secondary">{{ $delay['unit'] }}</span></td>
-                    <td style="color:var(--danger); font-weight:600;">{{ \Carbon\Carbon::parse($delay['end_date'])->translatedFormat('d F Y') }}</td>
-                    <td><span class="badge badge-warning">{{ $delay['progress'] }}%</span></td>
+                    <td><strong>{{ $delay->activity_code }}</strong></td>
+                    <td>{{ $delay->activity_name }}</td>
+                    <td><span class="badge badge-secondary">{{ $delay->unit ? $delay->unit->name : '-' }}</span></td>
+                    <td style="color:var(--danger); font-weight:600;">{{ $delay->end_date ? \Carbon\Carbon::parse($delay->end_date)->translatedFormat('d F Y') : '-' }}</td>
+                    <td><span class="badge badge-warning">{{ $delay->progress_percentage }}%</span></td>
                     <td>
-                        <a href="{{ route('activities.show', $delay['id']) }}" class="btn btn-secondary btn-sm">Lihat Detail</a>
+                        <a href="{{ route('activities.show', $delay->id) }}" class="btn btn-secondary btn-sm">Lihat Detail</a>
                     </td>
                 </tr>
                 @endforeach

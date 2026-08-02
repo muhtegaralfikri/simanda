@@ -7,10 +7,15 @@
 
         @php
             $activeYear = \App\Models\BudgetYear::where('is_active', true)->first();
-            $unreadAlertsCount = \App\Models\SystemAlert::where('user_id', auth()->id())
+            $unreadAlertsQuery = \App\Models\SystemAlert::query()
                 ->whereNull('read_at')
-                ->whereNull('resolved_at')
-                ->count();
+                ->whereNull('resolved_at');
+            if (! auth()->user()->isAdmin()) {
+                $unreadAlertsQuery->where(function ($q) {
+                    $q->where('user_id', auth()->id())->orWhereNull('user_id');
+                });
+            }
+            $unreadAlertsCount = $unreadAlertsQuery->count();
         @endphp
         <div class="budget-year-badge">
             <svg style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>

@@ -80,7 +80,7 @@ class ReportController extends Controller
             ];
         }
 
-        return $this->exportService->exportCsv('Laporan Ringkasan Anggaran', $headers, $rows, $user, 'ringkasan-anggaran');
+        return $this->exportService->exportExcel('Laporan Ringkasan Anggaran', $headers, $rows, $user, 'ringkasan-anggaran');
     }
 
     // 2. Laporan Realisasi Anggaran
@@ -135,7 +135,7 @@ class ReportController extends Controller
             ];
         }
 
-        return $this->exportService->exportCsv('Laporan Realisasi Anggaran', $headers, $rows, $user, 'realisasi-anggaran');
+        return $this->exportService->exportExcel('Laporan Realisasi Anggaran', $headers, $rows, $user, 'realisasi-anggaran');
     }
 
     // 3. Laporan Kegiatan
@@ -190,7 +190,7 @@ class ReportController extends Controller
             ];
         }
 
-        return $this->exportService->exportCsv('Laporan Pelaksanaan Kegiatan', $headers, $rows, $user, 'pelaksanaan-kegiatan');
+        return $this->exportService->exportExcel('Laporan Pelaksanaan Kegiatan', $headers, $rows, $user, 'pelaksanaan-kegiatan');
     }
 
     // 4. Laporan Progres Kegiatan
@@ -240,7 +240,7 @@ class ReportController extends Controller
             ];
         }
 
-        return $this->exportService->exportCsv('Laporan Progres Kegiatan', $headers, $rows, $user, 'progres-kegiatan');
+        return $this->exportService->exportExcel('Laporan Progres Kegiatan', $headers, $rows, $user, 'progres-kegiatan');
     }
 
     // 5. Laporan Kelengkapan Dokumen
@@ -292,7 +292,7 @@ class ReportController extends Controller
             ];
         }
 
-        return $this->exportService->exportCsv('Laporan Kelengkapan Dokumen', $headers, $rows, $user, 'kelengkapan-dokumen');
+        return $this->exportService->exportExcel('Laporan Kelengkapan Dokumen', $headers, $rows, $user, 'kelengkapan-dokumen');
     }
 
     // 6. Laporan Verifikasi
@@ -341,7 +341,7 @@ class ReportController extends Controller
             ];
         }
 
-        return $this->exportService->exportCsv('Laporan Riwayat Verifikasi', $headers, $rows, $user, 'riwayat-verifikasi');
+        return $this->exportService->exportExcel('Laporan Riwayat Verifikasi', $headers, $rows, $user, 'riwayat-verifikasi');
     }
 
     // 7. Laporan Serapan Bulanan
@@ -390,7 +390,7 @@ class ReportController extends Controller
             ];
         }
 
-        return $this->exportService->exportCsv('Laporan Serapan Bulanan', $headers, $rows, $user, 'serapan-bulanan');
+        return $this->exportService->exportExcel('Laporan Serapan Bulanan', $headers, $rows, $user, 'serapan-bulanan');
     }
 
     // 8. Laporan Sisa Anggaran
@@ -442,7 +442,7 @@ class ReportController extends Controller
             ];
         }
 
-        return $this->exportService->exportCsv('Laporan Sisa Anggaran', $headers, $rows, $user, 'sisa-anggaran');
+        return $this->exportService->exportExcel('Laporan Sisa Anggaran', $headers, $rows, $user, 'sisa-anggaran');
     }
 
     protected function getMasterFilterData(): array

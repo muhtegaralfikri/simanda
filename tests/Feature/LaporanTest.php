@@ -178,7 +178,7 @@ class LaporanTest extends TestCase
 
         $response = $this->get('/admin/reports/budget-summary/excel');
         $response->assertStatus(200);
-        $this->assertStringContainsString('text/csv', $response->headers->get('Content-Type'));
+        $this->assertStringContainsString('application/vnd.ms-excel', $response->headers->get('Content-Type'));
 
         $this->assertDatabaseHas('activity_logs', [
             'action' => 'export_excel',

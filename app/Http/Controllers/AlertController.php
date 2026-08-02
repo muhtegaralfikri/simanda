@@ -14,7 +14,9 @@ class AlertController extends Controller
         $query = SystemAlert::query();
 
         if (! $user->isAdmin()) {
-            $query->where('user_id', $user->id);
+            $query->where(function ($q) use ($user) {
+                $q->where('user_id', $user->id)->orWhereNull('user_id');
+            });
         }
 
         if ($request->filled('severity')) {
@@ -43,7 +45,7 @@ class AlertController extends Controller
     public function markAsRead(SystemAlert $alert)
     {
         $user = auth()->user();
-        if (! $user->isAdmin() && $alert->user_id !== $user->id) {
+        if (! $user->isAdmin() && $alert->user_id !== null && $alert->user_id !== $user->id) {
             abort(403, 'Anda tidak berhak mengakses peringatan ini.');
         }
 
@@ -59,10 +61,17 @@ class AlertController extends Controller
     public function markAllAsRead()
     {
         $user = auth()->user();
-        SystemAlert::where('user_id', $user->id)
-            ->whereNull('read_at')
-            ->update(['read_at' => now()]);
 
-        return back()->with('success', 'Seluruh peringatan Anda ditandai sudah dibaca.');
+        $query = SystemAlert::query()->whereNull('read_at');
+
+        if (! $user->isAdmin()) {
+            $query->where(function ($q) use ($user) {
+                $q->where('user_id', $user->id)->orWhereNull('user_id');
+            });
+        }
+
+        $query->update(['read_at' => now()]);
+
+        return back()->with('success', 'Seluruh peringatan ditandai sudah dibaca.');
     }
 }

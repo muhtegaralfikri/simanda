@@ -3,7 +3,7 @@
 @section('title', 'Pusat Peringatan Sistem SIMANDA')
 
 @section('content')
-<div class="page-header">
+<div class="page-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
     <div>
         <h1 class="page-title">Pusat Peringatan Internal</h1>
         <div class="page-subtitle">Daftar pemberitahuan tenggat waktu, revisi, dan status tindakan kegiatan</div>
@@ -56,11 +56,11 @@
             if ($alert->severity === 'warning') { $borderColor = 'var(--warning)'; $badgeClass = 'badge-warning'; }
             if ($alert->severity === 'danger') { $borderColor = 'var(--danger)'; $badgeClass = 'badge-danger'; }
         @endphp
-        <div style="border-left: 4px solid {{ $borderColor }}; background: {{ $alert->read_at ? '#f8fafc' : '#ffffff' }}; border-radius:6px; padding:14px 18px; border-top:1px solid #e2e8f0; border-right:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
-            <div style="flex:1;">
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+        <div style="border-left: 4px solid {{ $borderColor }}; background: {{ $alert->read_at ? '#f8fafc' : '#ffffff' }}; border-radius:6px; padding:14px 18px; border:1px solid #e2e8f0; border-left-width:4px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:12px;">
+            <div style="flex:1 1 240px; min-width:0;">
+                <div style="display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
                     <span class="badge {{ $badgeClass }}">{{ strtoupper($alert->severity) }}</span>
-                    <strong style="font-size:1rem;">{{ $alert->title }}</strong>
+                    <strong style="font-size:1rem; word-break:break-word;">{{ $alert->title }}</strong>
                     @if($alert->resolved_at)
                         <span class="badge badge-success">Selesai</span>
                     @endif
@@ -68,20 +68,20 @@
                         <span class="badge badge-info" style="background:#3b82f6;">Baru</span>
                     @endif
                 </div>
-                <div style="font-size:0.9rem; color:#334155; margin-bottom:6px;">{{ $alert->message }}</div>
+                <div style="font-size:0.9rem; color:#334155; margin-bottom:6px; word-break:break-word;">{{ $alert->message }}</div>
                 <div style="font-size:0.75rem; color:var(--text-muted);">
                     Tenggat: <strong>{{ $alert->due_date ? $alert->due_date->format('d/m/Y') : '-' }}</strong> &bull; Dibuat: {{ $alert->created_at->diffForHumans() }}
                 </div>
             </div>
 
-            <div style="display:flex; gap:8px; align-items:center;">
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:2px;">
                 @if($alert->action_url)
-                    <a href="{{ $alert->action_url }}" class="btn btn-primary btn-sm">Buka Tindakan</a>
+                    <a href="{{ $alert->action_url }}" class="btn btn-primary btn-sm" style="white-space:nowrap;">Buka Tindakan</a>
                 @endif
                 @if(! $alert->read_at)
-                    <form method="POST" action="{{ route('admin.alerts.read', $alert->id) }}">
+                    <form method="POST" action="{{ route('admin.alerts.read', $alert->id) }}" style="display:inline-block; margin:0;">
                         @csrf
-                        <button type="submit" class="btn btn-secondary btn-sm">&check; Dibaca</button>
+                        <button type="submit" class="btn btn-secondary btn-sm" style="white-space:nowrap;">&check; Dibaca</button>
                     </form>
                 @endif
             </div>
