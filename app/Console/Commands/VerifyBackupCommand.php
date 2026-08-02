@@ -15,8 +15,8 @@ class VerifyBackupCommand extends Command
         $path = $this->option('path');
 
         if (! $path) {
-            // Pick latest successful backup
-            $latest = \App\Models\BackupHistory::where('status', 'success')->latest('completed_at')->first();
+            // Pick latest backup that completed successfully or has already been verified.
+            $latest = \App\Models\BackupHistory::whereIn('status', ['success', 'verified'])->latest('completed_at')->first();
             if ($latest) {
                 $path = $latest->backup_path_reference;
             }

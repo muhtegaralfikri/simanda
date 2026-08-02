@@ -25,7 +25,7 @@ class BackupController extends Controller
         }
 
         $backups = BackupHistory::with('creator')->orderBy('created_at', 'desc')->paginate(15);
-        $latestSuccessful = BackupHistory::where('status', 'success')->latest('completed_at')->first();
+        $latestSuccessful = BackupHistory::whereIn('status', ['success', 'verified'])->latest('completed_at')->first();
 
         return view('admin.system.backups', compact('backups', 'latestSuccessful'));
     }

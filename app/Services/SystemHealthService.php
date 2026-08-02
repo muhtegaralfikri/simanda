@@ -63,7 +63,7 @@ class SystemHealthService
         ];
 
         // 5. Backup Status & Age
-        $latestBackup = BackupHistory::where('status', 'success')->latest('completed_at')->first();
+        $latestBackup = BackupHistory::whereIn('status', ['success', 'verified'])->latest('completed_at')->first();
         if ($latestBackup && $latestBackup->completed_at) {
             $hoursOld = (int) now()->diffInHours($latestBackup->completed_at);
             $checks['backup'] = [
@@ -115,12 +115,15 @@ class SystemHealthService
         // 8. Scheduler Heartbeat
         $lastHeartbeat = Cache::get('simanda_scheduler_heartbeat');
         if ($lastHeartbeat) {
-            $diffMinutes = (int) now()->diffInMinutes($lastHeartbeat);
+            $heartbeatAt = $lastHeartbeat instanceof \DateTimeInterface
+                ? $lastHeartbeat
+                : \Carbon\Carbon::parse($lastHeartbeat);
+            $diffMinutes = (int) abs(now()->diffInMinutes($heartbeatAt, false));
             $checks['scheduler'] = [
                 'label' => 'Scheduler Heartbeat',
                 'value' => "Aktif ({$diffMinutes} menit lalu)",
                 'status' => $diffMinutes <= 90 ? 'good' : 'warning',
-                'note' => "Heartbeat terakhir: {$lastHeartbeat}",
+                'note' => "Heartbeat terakhir: {$heartbeatAt->format('d/m/Y H:i:s')}",
             ];
         } else {
             $checks['scheduler'] = [

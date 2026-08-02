@@ -12,7 +12,7 @@ class SchedulerHeartbeatCommand extends Command
 
     public function handle()
     {
-        Cache::put('simanda_scheduler_heartbeat', now()->format('d/m/Y H:i:s'));
+        Cache::put('simanda_scheduler_heartbeat', now()->toIso8601String());
         $this->info('Scheduler heartbeat diperbarui.');
 
         return Command::SUCCESS;
