@@ -4,7 +4,6 @@
 <aside class="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
     <div class="sidebar-header">
         <div class="sidebar-header-brand">
-            <div class="logo-badge">SMA</div>
             <div>
                 <div class="app-title">SIMANDA</div>
                 <div class="app-subtitle">Monitoring Anggaran & Dokumen</div>
