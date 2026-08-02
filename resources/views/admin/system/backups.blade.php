@@ -16,7 +16,7 @@
                 <option value="weekly">Weekly (Mingguan)</option>
                 <option value="monthly">Monthly (Bulanan)</option>
             </select>
-            <button type="submit" class="btn btn-primary">&plus; Jalankan Backup Manual</button>
+            <button type="submit" class="btn btn-primary">+ Jalankan Backup Manual</button>
         </form>
     </div>
 </div>
@@ -85,7 +85,7 @@
                         @if($b->status === 'success' || $b->status === 'verified')
                         <form method="POST" action="{{ route('admin.system.backups.verify', $b->id) }}">
                             @csrf
-                            <button type="submit" class="btn btn-secondary btn-sm">&shield; Uji Verifikasi SHA-256</button>
+                            <button type="submit" class="btn btn-secondary btn-sm">Uji Verifikasi SHA-256</button>
                         </form>
                         @else
                         -

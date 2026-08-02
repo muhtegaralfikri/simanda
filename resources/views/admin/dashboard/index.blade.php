@@ -107,7 +107,7 @@
 @if(auth()->user()->isPPTK() && count($analytics['action_items']) > 0)
 <div class="card" style="border:2px solid var(--accent-color); margin-bottom:24px;">
     <div class="card-header">
-        <h3 class="card-title" style="color:var(--accent-color);">⚡ Tindakan yang Perlu Anda Selesaikan</h3>
+        <h3 class="card-title" style="color:var(--accent-color);">Tindakan yang Perlu Anda Selesaikan</h3>
     </div>
     <div style="display:flex; flex-direction:column; gap:8px; padding:16px;">
         @foreach($analytics['action_items'] as $item)
@@ -198,7 +198,7 @@
 @if(count($analytics['delayed_activities']) > 0)
 <div class="card" style="border-left:4px solid var(--danger);">
     <div class="card-header">
-        <h3 class="card-title" style="color:var(--danger);">⚠️ Kegiatan Terlambat Melewati Tenggat Waktu</h3>
+        <h3 class="card-title" style="color:var(--danger);">Kegiatan Terlambat Melewati Tenggat Waktu</h3>
     </div>
     <div class="table-responsive">
         <table class="table">

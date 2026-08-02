@@ -16,7 +16,7 @@
             @if($activity->submission_status !== 'under_review')
             <form action="{{ route('admin.verifications.start', $activity->id) }}" method="POST" style="display:inline;">
                 @csrf
-                <button type="submit" class="btn btn-primary">&play; Mulai Pemeriksaan</button>
+                <button type="submit" class="btn btn-primary">Mulai Pemeriksaan</button>
             </form>
             @endif
         @endif
@@ -174,15 +174,15 @@
     </div>
     <div style="padding:16px; display:flex; gap:12px; flex-wrap:wrap;">
         <button class="btn btn-secondary" onclick="document.getElementById('modalReqRev').style.display='block'">
-            &circlearrowleft; Kembalikan untuk Revisi Kegiatan
+            Kembalikan untuk Revisi Kegiatan
         </button>
 
         <button class="btn btn-danger" onclick="document.getElementById('modalRejectSub').style.display='block'">
-            &times; Tolak Pengajuan Kegiatan
+            Tolak Pengajuan Kegiatan
         </button>
 
         <button class="btn btn-success" onclick="document.getElementById('modalCloseAct').style.display='block'" style="background:var(--success); color:white; font-weight:bold;">
-            &check; Setujui & Tutup Kegiatan
+            Setujui & Tutup Kegiatan
         </button>
     </div>
 </div>

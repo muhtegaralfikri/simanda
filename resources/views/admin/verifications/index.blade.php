@@ -91,7 +91,7 @@
                     </td>
                     <td style="text-align:center;">
                         <a href="{{ route('admin.verifications.show', $act->id) }}" class="btn btn-primary btn-sm">
-                            &eye; Periksa
+                            Periksa
                         </a>
                     </td>
                 </tr>

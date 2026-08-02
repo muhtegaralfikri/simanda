@@ -9,7 +9,7 @@
         <div class="page-subtitle">Pemeriksaan komponen teknis server VPS 2 GB RAM, database SQLite WAL, direktori privat, dan scheduler</div>
     </div>
     <div>
-        <a href="{{ route('admin.system.health') }}" class="btn btn-secondary">&circular_arrows; Refresh Status</a>
+        <a href="{{ route('admin.system.health') }}" class="btn btn-secondary">Refresh Status</a>
     </div>
 </div>
 

@@ -17,12 +17,12 @@
         <form action="{{ route('activities.submit-verification', $activity->id) }}" method="POST" style="display:inline;">
             @csrf
             <button type="submit" class="btn btn-success" style="background:var(--success); color:white; font-weight:bold;" onclick="return confirm('Ajukan kegiatan ini untuk verifikasi?');">
-                &paperplane; Ajukan untuk Verifikasi
+                Ajukan untuk Verifikasi
             </button>
         </form>
         @endcan
 
-        <a href="{{ route('admin.verifications.show', $activity->id) }}" class="btn btn-primary">&eye; Modul Verifikasi</a>
+        <a href="{{ route('admin.verifications.show', $activity->id) }}" class="btn btn-primary">Modul Verifikasi</a>
 
         @can('update', $activity)
         <a href="{{ route('activities.edit', $activity->id) }}" class="btn btn-secondary">Edit Identitas</a>
@@ -32,14 +32,14 @@
         <form action="{{ route('activities.start', $activity->id) }}" method="POST" style="display:inline;">
             @csrf
             <button type="submit" class="btn btn-primary" onclick="return confirm('Mulai pelaksanaan kegiatan ini?');">
-                &play; Mulai Pelaksanaan
+                Mulai Pelaksanaan
             </button>
         </form>
         @endcan
 
         @can('updateProgress', $activity)
         <button type="button" class="btn btn-primary" onclick="document.getElementById('modalProgress').style.display='block'">
-            &chart; Perbarui Progres ({{ $activity->progress_percentage }}%)
+            Perbarui Progres ({{ $activity->progress_percentage }}%)
         </button>
         @endcan
 
@@ -48,21 +48,21 @@
                 <form action="{{ route('activities.plan', $activity->id) }}" method="POST" style="display:inline;">
                     @csrf
                     <button type="submit" class="btn btn-primary" {{ $activity->total_budget_plan !== $activity->budget_ceiling ? 'disabled title=Total_RAB_harus_sama_dengan_Pagu' : '' }}>
-                        &check; Tetapkan sebagai Direncanakan
+                        Tetapkan sebagai Direncanakan
                     </button>
                 </form>
             @elseif($activity->status === 'planned')
                 <form action="{{ route('activities.return-to-draft', $activity->id) }}" method="POST" style="display:inline;">
                     @csrf
                     <button type="submit" class="btn btn-secondary">
-                        &circlearrowleft; Kembalikan ke Draft
+                        Kembalikan ke Draft
                     </button>
                 </form>
             @endif
 
             @if(!in_array($activity->status, ['cancelled', 'completed']))
                 <button type="button" class="btn btn-danger" onclick="document.getElementById('modalCancel').style.display='block'">
-                    &times; Batalkan Kegiatan
+                    Batalkan Kegiatan
                 </button>
             @endif
         @endcan
@@ -72,20 +72,20 @@
 @if($activity->status === 'completed')
 <div class="alert alert-success" style="background:#ecfdf5; border-color:#10b981; color:#065f46;">
     <div>
-        <strong>&check; Kegiatan Disetujui & Selesai (COMPLETED):</strong> Seluruh dokumen dan realisasi telah diverifikasi. Seluruh data berstatus Read-Only.
+        <strong>Kegiatan Disetujui & Selesai (COMPLETED):</strong> Seluruh dokumen dan realisasi telah diverifikasi. Seluruh data berstatus Read-Only.
         @if($activity->remaining_budget_note)<br><small><strong>Catatan Sisa Anggaran:</strong> {{ $activity->remaining_budget_note }}</small>@endif
     </div>
 </div>
 @elseif($activity->status === 'waiting_verification')
 <div class="alert alert-info">
     <div>
-        <strong>&hourglass; Menunggu Verifikasi:</strong> Kegiatan saat ini sedang dalam antrean pemeriksaan oleh tim Verifikator (Putaran {{ $activity->verification_round }}).
+        <strong>Menunggu Verifikasi:</strong> Kegiatan saat ini sedang dalam antrean pemeriksaan oleh tim Verifikator (Putaran {{ $activity->verification_round }}).
     </div>
 </div>
 @elseif($activity->status === 'revision')
 <div class="alert alert-warning" style="background:#fff7ed; border-color:#f97316; color:#9a3412;">
     <div>
-        <strong>&circlearrowleft; Perlu Revisi:</strong> Verifikator meminta perbaikan pada realisasi/dokumen kegiatan ini. Silakan perbaiki item bernoda revisi lalu ajukan ulang.
+        <strong>Perlu Revisi:</strong> Verifikator meminta perbaikan pada realisasi/dokumen kegiatan ini. Silakan perbaiki item bernoda revisi lalu ajukan ulang.
     </div>
 </div>
 @elseif($activity->status === 'cancelled')

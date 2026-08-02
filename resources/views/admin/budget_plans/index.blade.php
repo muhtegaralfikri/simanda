@@ -71,7 +71,7 @@
                         </td>
                         <td>
                             @if($totalPlan === $act->budget_ceiling && $act->budget_ceiling > 0)
-                                <span class="badge badge-success">✓ 100% Sesuai Pagu</span>
+                                <span class="badge badge-success">100% Sesuai Pagu</span>
                             @elseif($totalPlan > $act->budget_ceiling)
                                 <span class="badge badge-danger">! Melebihi Pagu</span>
                             @else
