@@ -12,9 +12,32 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::with('unit')->orderBy('name')->paginate(10);
+        $query = User::with('unit');
+
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhere('phone', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('role')) {
+            $query->where('role', $request->input('role'));
+        }
+
+        if ($request->filled('unit_id')) {
+            $query->where('unit_id', $request->input('unit_id'));
+        }
+
+        if ($request->has('status') && $request->status !== null && $request->status !== '') {
+            $query->where('is_active', (bool) $request->status);
+        }
+
+        $users = $query->orderBy('name')->paginate(10)->withQueryString();
         $units = Unit::where('is_active', true)->orderBy('name')->get();
 
         return view('admin.master.users.index', compact('users', 'units'));
@@ -74,5 +97,19 @@ class UserController extends Controller
         ActivityLog::log('toggle_active', 'Pengguna', "Akun pengguna {$user->name} {$statusStr}", $user);
 
         return back()->with('success', "Akun pengguna {$user->name} telah {$statusStr}.");
+    }
+
+    public function destroy(User $user)
+    {
+        if ($user->id === auth()->id()) {
+            return back()->with('error', 'Anda tidak dapat menghapus akun Anda sendiri.');
+        }
+
+        $name = $user->name;
+        $user->delete();
+
+        ActivityLog::log('delete', 'Pengguna', "Menghapus akun pengguna {$name}", null);
+
+        return back()->with('success', "Pengguna {$name} berhasil dihapus.");
     }
 }

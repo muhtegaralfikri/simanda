@@ -84,7 +84,7 @@
             Unit Kerja
         </a>
         <a href="{{ route('master.users.index') }}" class="menu-item {{ request()->routeIs('master.users.*') ? 'active' : '' }}">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 435c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm0 18c-5.33 0-16 2.67-16 8v4h32v-4c0-5.33-10.67-8-16-8z"/></svg>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             Pengguna
         </a>
         <a href="{{ route('master.funding-sources.index') }}" class="menu-item {{ request()->routeIs('master.funding-sources.*') ? 'active' : '' }}">
