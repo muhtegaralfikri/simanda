@@ -65,7 +65,7 @@
                         <span class="badge badge-success">Selesai</span>
                     @endif
                     @if(! $alert->read_at)
-                        <span class="badge badge-info" style="background:#3b82f6;">Baru</span>
+                        <span class="badge badge-info" style="background:#3b82f6; color:white;">Baru</span>
                     @endif
                 </div>
                 <div style="font-size:0.9rem; color:#334155; margin-bottom:6px; word-break:break-word;">{{ $alert->message }}</div>

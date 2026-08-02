@@ -9,7 +9,7 @@
         <div class="page-subtitle">Log audit keputusan verifikator terhadap kegiatan, realisasi, dan dokumen</div>
     </div>
     <div style="display:flex; gap:8px;">
-        <button onclick="window.print()" class="btn btn-secondary">&printer; Cetak Browser</button>
+        <button onclick="window.print()" class="btn btn-secondary">Cetak Browser</button>
         <a href="{{ route('admin.reports.verifications.pdf', request()->query()) }}" target="_blank" class="btn btn-primary">PDF</a>
         <a href="{{ route('admin.reports.verifications.excel', request()->query()) }}" class="btn btn-success" style="background:var(--success); color:white;">Excel</a>
     </div>

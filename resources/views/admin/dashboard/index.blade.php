@@ -98,7 +98,7 @@
         <span class="badge badge-info" style="font-size:0.9rem; padding:8px 12px;">Sedang Berjalan: <strong>{{ $analytics['status_counts']['ongoing'] }}</strong></span>
         <span class="badge badge-warning" style="font-size:0.9rem; padding:8px 12px;">Menunggu Verifikasi: <strong>{{ $analytics['status_counts']['waiting_verification'] }}</strong></span>
         <span class="badge badge-secondary" style="font-size:0.9rem; padding:8px 12px; background:#f97316; color:white;">Perlu Revisi: <strong>{{ $analytics['status_counts']['revision'] }}</strong></span>
-        <span class="badge badge-success" style="font-size:0.9rem; padding:8px 12px; background:var(--success);">Selesai (Completed): <strong>{{ $analytics['status_counts']['completed'] }}</strong></span>
+        <span class="badge badge-success" style="font-size:0.9rem; padding:8px 12px; background:var(--success); color:white;">Selesai (Completed): <strong>{{ $analytics['status_counts']['completed'] }}</strong></span>
         <span class="badge badge-danger" style="font-size:0.9rem; padding:8px 12px;">Dibatalkan: <strong>{{ $analytics['status_counts']['cancelled'] }}</strong></span>
     </div>
 </div>

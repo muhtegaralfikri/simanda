@@ -73,7 +73,7 @@
                     <td>
                         @switch($b->status)
                             @case('success') <span class="badge badge-success">Sukses</span> @break
-                            @case('verified') <span class="badge badge-success" style="background:#059669;">Verified (Valid)</span> @break
+                            @case('verified') <span class="badge badge-success" style="background:#059669; color:white;">Verified (Valid)</span> @break
                             @case('failed') <span class="badge badge-danger">Gagal</span> @break
                             @default <span class="badge badge-warning">Running</span>
                         @endswitch
