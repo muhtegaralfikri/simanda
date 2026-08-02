@@ -116,4 +116,19 @@ class UserManagementTest extends TestCase
         $response->assertSessionHas('error');
         $this->assertDatabaseHas('users', ['id' => $this->admin->id]);
     }
+
+    public function test_cannot_change_role_or_delete_last_admin(): void
+    {
+        // Pastikan hanya ada 1 admin
+        User::where('role', 'admin')->where('id', '!=', $this->admin->id)->delete();
+
+        // 1. Coba ubah role admin terakhir menjadi pptk
+        $response = $this->actingAs($this->admin)->put(route('master.users.update', $this->admin->id), [
+            'name' => $this->admin->name,
+            'email' => $this->admin->email,
+            'role' => 'pptk',
+        ]);
+        $response->assertSessionHas('error');
+        $this->assertEquals('admin', $this->admin->fresh()->role);
+    }
 }

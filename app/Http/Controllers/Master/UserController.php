@@ -73,6 +73,14 @@ class UserController extends Controller
             'password' => ['nullable', 'string', 'min:8'],
         ]);
 
+        // Guard: Mencegah mengubah role Administrator terakhir di sistem
+        if ($user->role === 'admin' && $validated['role'] !== 'admin') {
+            $adminCount = User::where('role', 'admin')->where('is_active', true)->count();
+            if ($adminCount <= 1) {
+                return back()->with('error', 'Tidak dapat mengubah role Administrator terakhir. Sistem harus memiliki minimal 1 Administrator aktif.');
+            }
+        }
+
         if (! empty($validated['password'])) {
             $validated['password'] = Hash::make($validated['password']);
         } else {
@@ -91,6 +99,14 @@ class UserController extends Controller
             return back()->with('error', 'Anda tidak dapat menonaktifkan akun sendiri.');
         }
 
+        // Guard: Mencegah menonaktifkan Administrator terakhir di sistem
+        if ($user->role === 'admin' && $user->is_active) {
+            $adminCount = User::where('role', 'admin')->where('is_active', true)->count();
+            if ($adminCount <= 1) {
+                return back()->with('error', 'Tidak dapat menonaktifkan Administrator terakhir. Sistem harus memiliki minimal 1 Administrator aktif.');
+            }
+        }
+
         $user->update(['is_active' => ! $user->is_active]);
         $statusStr = $user->is_active ? 'diaktifkan' : 'dinonaktifkan';
 
@@ -103,6 +119,14 @@ class UserController extends Controller
     {
         if ($user->id === auth()->id()) {
             return back()->with('error', 'Anda tidak dapat menghapus akun Anda sendiri.');
+        }
+
+        // Guard: Mencegah menghapus Administrator terakhir di sistem
+        if ($user->role === 'admin') {
+            $adminCount = User::where('role', 'admin')->count();
+            if ($adminCount <= 1) {
+                return back()->with('error', 'Tidak dapat menghapus Administrator terakhir. Sistem harus memiliki minimal 1 Administrator.');
+            }
         }
 
         $name = $user->name;
