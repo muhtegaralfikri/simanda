@@ -45,7 +45,7 @@ class BudgetPlanController extends Controller
             });
         }
 
-        $activities = $query->orderBy('created_at', 'desc')->paginate(15);
+        $activities = $query->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
         $units = Unit::where('is_active', true)->orderBy('name')->get();
 
         return view('admin.budget_plans.index', compact('activities', 'units', 'activeYear'));

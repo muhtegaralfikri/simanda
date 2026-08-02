@@ -24,7 +24,7 @@ class BackupController extends Controller
             abort(403, 'Manajemen backup hanya dapat diakses oleh Administrator.');
         }
 
-        $backups = BackupHistory::with('creator')->orderBy('created_at', 'desc')->paginate(15);
+        $backups = BackupHistory::with('creator')->orderBy('created_at', 'desc')->paginate(15)->withQueryString();
         $latestSuccessful = BackupHistory::whereIn('status', ['success', 'verified'])->latest('completed_at')->first();
 
         return view('admin.system.backups', compact('backups', 'latestSuccessful'));

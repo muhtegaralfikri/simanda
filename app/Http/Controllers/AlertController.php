@@ -37,7 +37,7 @@ class AlertController extends Controller
             $query->whereNull('resolved_at');
         }
 
-        $alerts = $query->orderBy('created_at', 'desc')->paginate(20);
+        $alerts = $query->orderBy('created_at', 'desc')->paginate(20)->withQueryString();
 
         return view('admin.alerts.index', compact('alerts'));
     }

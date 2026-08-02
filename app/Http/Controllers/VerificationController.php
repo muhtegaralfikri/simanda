@@ -59,7 +59,7 @@ class VerificationController extends Controller
             });
         }
 
-        $activities = $query->orderBy('submitted_at', 'desc')->paginate(15);
+        $activities = $query->orderBy('submitted_at', 'desc')->paginate(15)->withQueryString();
         $units = Unit::where('is_active', true)->orderBy('name')->get();
 
         return view('admin.verifications.index', compact('activities', 'units', 'activeYear'));

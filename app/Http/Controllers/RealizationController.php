@@ -60,7 +60,7 @@ class RealizationController extends Controller
             });
         }
 
-        $realizations = $query->orderBy('transaction_date', 'desc')->paginate(15);
+        $realizations = $query->orderBy('transaction_date', 'desc')->paginate(15)->withQueryString();
         $units = Unit::where('is_active', true)->orderBy('name')->get();
         $expenseTypes = ExpenseType::where('is_active', true)->orderBy('code')->get();
 
@@ -93,7 +93,7 @@ class RealizationController extends Controller
             });
         }
 
-        $activities = $query->orderBy('start_date', 'asc')->paginate(10);
+        $activities = $query->orderBy('start_date', 'asc')->paginate(10)->withQueryString();
         $units = Unit::where('is_active', true)->orderBy('name')->get();
 
         return view('admin.realizations.progress', compact('activities', 'units', 'activeYear'));

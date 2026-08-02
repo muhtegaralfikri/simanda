@@ -11,7 +11,7 @@ class BudgetYearController extends Controller
 {
     public function index()
     {
-        $budgetYears = BudgetYear::orderBy('year', 'desc')->paginate(10);
+        $budgetYears = BudgetYear::orderBy('year', 'desc')->paginate(10)->withQueryString();
         return view('admin.master.budget_years.index', compact('budgetYears'));
     }
 

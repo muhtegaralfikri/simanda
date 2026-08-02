@@ -647,3 +647,54 @@ body {
         font-size: 0.85rem;
     }
 }
+
+/* Skeleton Loading & Animation Optimizations */
+@keyframes skeleton-shimmer {
+    0% {
+        opacity: 0.6;
+        background-color: var(--bg-hover, rgba(255, 255, 255, 0.05));
+    }
+    50% {
+        opacity: 1;
+        background-color: var(--border-color, rgba(255, 255, 255, 0.12));
+    }
+    100% {
+        opacity: 0.6;
+        background-color: var(--bg-hover, rgba(255, 255, 255, 0.05));
+    }
+}
+
+.skeleton {
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+    border-radius: var(--radius-sm, 6px);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.skeleton-text {
+    height: 0.9rem;
+    width: 100%;
+    margin-bottom: 0.3rem;
+}
+
+.skeleton-badge {
+    height: 1.4rem;
+    width: 70px;
+    border-radius: 9999px;
+}
+
+.skeleton-btn {
+    height: 32px;
+    width: 80px;
+    border-radius: var(--radius-md, 8px);
+}
+
+.table-responsive {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.is-loading .table-responsive {
+    opacity: 0.5;
+    pointer-events: none;
+}
+

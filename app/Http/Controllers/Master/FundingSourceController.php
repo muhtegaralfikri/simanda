@@ -11,7 +11,7 @@ class FundingSourceController extends Controller
 {
     public function index()
     {
-        $fundingSources = FundingSource::orderBy('code')->paginate(10);
+        $fundingSources = FundingSource::orderBy('code')->paginate(10)->withQueryString();
         return view('admin.master.funding_sources.index', compact('fundingSources'));
     }
 

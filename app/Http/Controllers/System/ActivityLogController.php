@@ -16,7 +16,7 @@ class ActivityLogController extends Controller
             $query->where('module', $request->module);
         }
 
-        $logs = $query->paginate(20);
+        $logs = $query->paginate(20)->withQueryString();
 
         return view('admin.system.logs.index', compact('logs'));
     }

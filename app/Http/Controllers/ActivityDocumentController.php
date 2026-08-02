@@ -48,7 +48,7 @@ class ActivityDocumentController extends Controller
             });
         }
 
-        $activities = $query->orderBy('created_at', 'desc')->paginate(10);
+        $activities = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
         $units = Unit::where('is_active', true)->orderBy('name')->get();
         $documentTypes = DocumentType::where('is_active', true)->orderBy('stage')->get();
 

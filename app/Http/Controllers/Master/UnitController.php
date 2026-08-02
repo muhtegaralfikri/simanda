@@ -11,7 +11,7 @@ class UnitController extends Controller
 {
     public function index()
     {
-        $units = Unit::withCount('users')->orderBy('code')->paginate(10);
+        $units = Unit::withCount('users')->orderBy('code')->paginate(10)->withQueryString();
         return view('admin.master.units.index', compact('units'));
     }
 

@@ -40,7 +40,7 @@ class ProgramController extends Controller
             });
         }
 
-        $programs = $query->orderBy('program_code')->paginate(10);
+        $programs = $query->orderBy('program_code')->paginate(10)->withQueryString();
         $units = Unit::where('is_active', true)->orderBy('name')->get();
 
         return view('admin.programs.index', compact('programs', 'units', 'activeYear'));
